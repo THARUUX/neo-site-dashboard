@@ -32,10 +32,11 @@
 
 
 ## NPM PACKAGES
-  -- npm add multiparty
-  -- npm add mongoose
-  -- npm add body-parser
-  -- npm add react-sweetalert2
-  -- npm install mongodb@latest
-  -- npm install @next-auth/mongodb-adapter --force
+
+          -- npm add multiparty
+          -- npm add mongoose
+          -- npm add body-parser
+          -- npm add react-sweetalert2
+          -- npm install mongodb@latest
+          -- npm install @next-auth/mongodb-adapter --force
 
