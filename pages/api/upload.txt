@@ -1,0 +1,18 @@
+import multiparty from 'multiparty';
+
+export default async function handle(req, res) {
+    const form = new multiparty.Form();
+    const {feilds,files} = await new Promise((resolve,reject) => {
+        form.parse(req, (err, feilds, files) => {
+            if (err) reject(err);
+            resolve({feilds, files});
+        });
+    });
+    console.log('Length:', files.file.length);
+    return res.json('nice');
+
+}
+
+export const config = {
+    api: { bodyParser: false },
+};
