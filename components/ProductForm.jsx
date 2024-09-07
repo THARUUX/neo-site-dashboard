@@ -27,6 +27,8 @@ export default function ProductForm({
   const [goToProducts, setGoToProducts] = useState(false);
   const router = useRouter();
 
+  console.log(_id);
+
   useEffect(() => {
     axios.get('/api/categories')
       .then(result => {
@@ -95,7 +97,7 @@ export default function ProductForm({
 
 
   const propertiesToFill = [];
-  if (categories.length > 0 && category) {
+  /*if (categories.length > 0 && category) {
     let catInfo = categories.find(({_id}) => _id === category);
     propertiesToFill.push(...catInfo.properties);
     while(catInfo?.parent?._id) {
@@ -103,7 +105,7 @@ export default function ProductForm({
       propertiesToFill.push(...parentCat.properties);
       catInfo = parentCat;
     }
-  }
+  }*/
 
   return (
     <div className="w-full h-full p-5 text-lime-900">

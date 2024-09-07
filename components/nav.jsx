@@ -1,7 +1,9 @@
 import Link from "next/link";
-import {useRouter} from "next/router";
+import {useRouter } from "next/router";
 import {signOut} from "next-auth/react";
 import Logo from "@/components/logo";
+import Loader from "./loader";
+import { useState } from "react";
 
 export default function Nav({show}) {
   const inactiveLink = 'flex gap-1 p-1 gap-3 text-xl items-center px-5 text-white hover:text-slate-900 hover:rounded-lg hover-py-2 hover:bg-slate-100';
@@ -10,12 +12,15 @@ export default function Nav({show}) {
   const activeIcon = inactiveIcon + ' text-primary';
   const router = useRouter();
   const {pathname} = router;
+  const [loading, setLoading] = useState(false);
+
   async function logout() {
     await router.push('/');
     await signOut();
   }
   return (
-    <aside className={(show?'left-0':'-left-full')+" top-0 text-gray-500 p-4 fixed w-full bg-gray-300 min-h-full md:static md:w-auto transition-all"}>
+    <aside className={(show?'left-0':'-left-full')+" top-0 text-gray-500 p-4 fixed w-full bg-slate-400 min-h-full md:static md:w-auto transition-all"}>
+      <Loader handle={loading} />
       <div className="mb-4 mr-4">
         <Logo/>
       </div>

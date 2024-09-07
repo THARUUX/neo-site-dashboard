@@ -10,7 +10,7 @@ export default function DeleteProductPage() {
     const router = useRouter();
     const {id} = router.query;
     const [productInfo, setProductInfo] = useState('');
-    const deleteButton = "Delete";
+    const [deleteButton,setDeleteButton] = useState("Delete");
 
     useEffect(() => {
         if (!id) {
@@ -25,11 +25,18 @@ export default function DeleteProductPage() {
         router.push('/products');
     }
 
-    async function deleteProduct(){
-        await axios.delete('/api/products?id='+id);
-        router.push('/products');
-        const deleteButton = "Deleted";
-    }
+    async function deleteProduct() {
+        try {
+          await axios.delete(`/api/products?id=${id}`);
+          
+          setDeleteButton("Deleted");
+                router.push('/products');
+          
+        } catch (err) {
+          console.error('Error deleting product:', err);
+        }
+      }
+      
 
   return (
     <Layout>

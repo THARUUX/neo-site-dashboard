@@ -7,6 +7,7 @@ import axios from 'axios';
 import { mongooseConnect } from '@/lib/mongoose';
 import { Order } from '@/models/Order';
 import Link from 'next/link';
+import FileManager from '@/components/FileManager';
 
 const poppins = Poppins({
   weight: '400',
@@ -86,10 +87,18 @@ export default function Home({ finishedOrders }) {
               </div>
             </div>
           </div>
-          <div className='px-3 py-1 text-center mt-10'>
-            <Link href="https://drive.google.com/drive/folders/12tN7pk9W0oWW2VsBRc2GYwuJ5CBb2TBC?usp=drive_link" className='px-3 py-1 bg-slate-800 text-slate-100 rounded shadow-lg mt-10'>
-              UPLOAD IMAGES
-            </Link>
+          <hr className='mt-10 mb-5'/>
+          <div className='px-3 py-1 text-center mx-10'>
+            <div className='mb-5'>              
+              <Link href="https://eu-north-1.console.aws.amazon.com/s3/buckets/neocreative?region=eu-north-1&bucketType=general&tab=objects" className=' px-3 py-1 bg-slate-800 text-slate-100 rounded shadow-lg mt-10'>
+                UPLOAD IMAGES
+              </Link>
+              <div className='mt-5 flex gap-10'>
+                <div>Email: developers.neo2024@gmail.com</div>
+                <div>Password: Tharuux@aws1221</div>
+              </div>
+            </div>
+            <FileManager/>
           </div>
         </div>
     </Layout>

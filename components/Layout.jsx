@@ -11,7 +11,7 @@ export default function Layout({children}) {
   const { data: session } = useSession()
   if(!session) {
     return (
-    <main className={`min-h-screen max-h-screen bg-gray-300 flex ${poppins.className}`}>
+    <main className={`min-h-screen max-h-screen bg-slate-400 flex ${poppins.className}`}>
       <Nav/>
       <div className=" bg-white flex-grow mt-2 rounded-lg mr-3 mb-2 max-h-full overflow-y-auto">
         {children}      
