@@ -40,12 +40,3 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 
-
-## NPM PACKAGES
-  -- npm add multiparty
-  -- npm add mongoose
-  -- npm add body-parser
-  -- npm add react-sweetalert2
-  -- npm install mongodb@latest
-  -- npm install @next-auth/mongodb-adapter --force
-
