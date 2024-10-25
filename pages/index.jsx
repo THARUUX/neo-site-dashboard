@@ -95,7 +95,7 @@ export default function Home({ finishedOrders }) {
               </Link>
               <div className='mt-5 flex gap-10'>
                 <div>Email: developers.neo2024@gmail.com</div>
-                <div>Password: Tharuux@aws1221</div>
+                <div>Password: aws@neo44</div>
               </div>
             </div>
             <FileManager/>
