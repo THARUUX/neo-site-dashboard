@@ -3,7 +3,6 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { DATETIME } from 'mysql/lib/protocol/constants/types';
 
 export default function OrderDetails() {
   const [orderInfo, setOrderInfo] = useState(null);
