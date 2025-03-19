@@ -14,24 +14,39 @@ const poppins = Poppins({
   subsets: ['latin'],
 })
 
-export default function Home({ finishedOrders }) {
+export default function Home({ }) {
   const [orders, setOrders] = useState([]);
-  const [ordersFinished, setOrdersFinished] = useState([]);
-  const [sale, setSale] = useState([]);
+  const [totalSales, setTotalSales] = useState(0);
+  const [completedOrders, setCompletedOrders] = useState('0');
+  const [unfinishedOrders, setUnfinishedOrders] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/orders').then(response => {
-      setOrders(response.data);
-    });
-  }, []);
-
-  const unfinished = orders.length - finishedOrders.length;
-
-  let totalSales = 0;
-  for (const order of finishedOrders) {
-    totalSales += parseFloat(order.total);
-  }
-
+    axios.get('/api/orders')
+      .then(response => {
+        const fetchedOrders = response.data;
+        setOrders(fetchedOrders);
+  
+        const completed = fetchedOrders.filter(order => order.status === "Completed");
+        setCompletedOrders(completed);
+  
+        const unfinished = fetchedOrders.filter(order => order.status !== "Completed" && order.status !== "Delivery" && order.status !== "Finished");
+        setUnfinishedOrders(unfinished);
+  
+        // Calculate total sales based on completed orders
+        let total = 0;
+        for (const order of completed) {
+          total += parseFloat(order.total); 
+        }
+        if(total){ 
+          setTotalSales(total);
+        }
+  
+      })
+      .catch(error => {
+        console.error('Error fetching orders:', error);
+      });
+  }, []); 
+  
 
 
 
@@ -59,18 +74,18 @@ export default function Home({ finishedOrders }) {
               ORDERS
               </div>
             </Link>
-            <Link href={'/Orders/finished'} className='flex flex-col items-center justify-center bg-slate-100 w-1/6 py-8 rounded-md shadow-md'>
+            <Link href={'/orders?orderstatus=Completed'} className='flex flex-col items-center justify-center bg-slate-100 w-1/6 py-8 rounded-md shadow-md'>
               <div className='text-xl justify-center flex flex-col items-center gap-3'>
                 <span className='text-5xl'>
-              {finishedOrders.length}
+              {completedOrders.length}
                 </span>
-              FINISHED
+              COMPLETED
               </div>
             </Link>
             <Link href={"/orders"} className='flex flex-col items-center justify-center bg-slate-100 w-1/6 py-8 rounded-md shadow-md'>
               <div className='text-xl justify-center flex flex-col items-center gap-3'>
                 <span className='text-5xl'>
-              {unfinished}
+              {unfinishedOrders.length}
                 </span>
               UNFINISHED
               </div>

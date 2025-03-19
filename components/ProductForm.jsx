@@ -1,29 +1,29 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import Spinner from "@/components/Spinner";
-import Layout from "@/components/Layout";
 
 export default function ProductForm({
   _id,
   title: existingTitle,
   description: existingDescription,
+  keyWords: existingKeyWords, // ✅ Corrected
   weight: existingWeight,
   stock: existingStock,
   price: existingPrice,
   images: existingImages,
   category: existingCategory,
-  properties:assignedProperties,
+  properties: assignedProperties,
 }) {
   const [title, setTitle] = useState(existingTitle || '');
   const [description, setDescription] = useState(existingDescription || '');
+  const [keyWords, setKeyWords] = useState(existingKeyWords || ''); // ✅ Now using existingKeyWords correctly
   const [weight, setWeight] = useState(existingWeight || '');
   const [stock, setStock] = useState(existingStock || '');
   const [price, setPrice] = useState(existingPrice || '');
   const [images, setImages] = useState(existingImages || []);
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState(existingCategory || '');
-  const [productProperties,setProductProperties] = useState(assignedProperties || {});
+  const [productProperties, setProductProperties] = useState(assignedProperties || {});
   const [goToProducts, setGoToProducts] = useState(false);
   const router = useRouter();
 
@@ -54,7 +54,7 @@ export default function ProductForm({
         categoryToSend = null;
       }
   
-      const data = { title, description, weight, stock, price, images, category: categoryToSend, properties: productProperties };
+      const data = { title, description, keyWords, weight, stock, price, images, category: categoryToSend, properties: productProperties };
   
       if (_id) {
         // Update
@@ -130,6 +130,16 @@ export default function ProductForm({
               className="border-b rounded-sm mt-1 flex-grow flex w-full border-gray-300 px-2"
               value={description}
               onChange={(ev) => setDescription(ev.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="keyWords">keyWords</label>
+            <textarea
+              name="keyWords"
+              placeholder="Enter the product keyWords"
+              className="border-b rounded-sm mt-1 flex-grow flex w-full border-gray-300 px-2"
+              value={keyWords}
+              onChange={(ev) => setKeyWords(ev.target.value)}
             />
           </div>
           <div>
